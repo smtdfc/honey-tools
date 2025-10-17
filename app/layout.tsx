@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import RootLayoutClient from "@/components/RootLayoutClient";
 import Container from "@/components/Container";
 import AppContainer from "@/components/AppContainer";
+import prisma from "@/lib/prisma";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,11 +12,8 @@ export const metadata: Metadata = {
 };
 
 async function getGlobalTools() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tools`, {
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error("Failed to fetch tools");
-  return res.json();
+  const tools = await prisma.tools.findMany();
+  return tools;
 }
 
 export default async function RootLayout({
