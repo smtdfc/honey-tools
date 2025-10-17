@@ -3,7 +3,7 @@ import React from "react";
 type CardProps = {
   title: string;
   subtitle?: string;
-  iconType: "img" | "class";
+  iconType: string;
   icon: string;
   children: React.ReactNode;
   onClick?: () => void;

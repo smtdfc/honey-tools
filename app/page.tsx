@@ -21,8 +21,8 @@ function MenuIcon({ items }: MenuIconProps) {
             key={t.id}
             title={t.name}
             subtitle={t.group}
-            iconType={t.iconType}
-            icon={t.icon}
+            iconType={t.iconType ?? "class"}
+            icon={t.icon ?? "apps"}
             onClick={() => router.push(`/tools/${t.id}`)}
           >
             <span>{t.description}</span>

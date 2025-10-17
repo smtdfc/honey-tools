@@ -5,13 +5,14 @@ import AppContainer from "@/components/AppContainer";
 import prisma from "@/lib/prisma";
 
 import "./globals.css";
+import { Tool } from "@/entities/tool";
 
 export const metadata: Metadata = {
   title: "Honey tools",
   description: "All tool in one place",
 };
 
-async function getGlobalTools() {
+async function getGlobalTools(): Promise<Tool[]> {
   const tools = await prisma.tools.findMany();
   return tools;
 }
