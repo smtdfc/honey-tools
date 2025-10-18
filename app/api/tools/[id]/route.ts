@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ToolService } from "@/services/tool";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+interface Params {
+  params: Promise<{ id: string }>;
+}
+
+export async function GET(req: NextRequest, { params }: Params) {
+  const { id } = await params;
 
   try {
     const tool = await ToolService.getToolById(id);
