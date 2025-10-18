@@ -47,7 +47,7 @@ export default function HomePage() {
   const debouncedSearch = useMemo(() => debounce(handleSearch, 50), [allTools]);
 
   return (
-    <div>
+    <div className="home-page-container">
       <div className="heading">
         <h1>Honey Tools</h1>
         <h3>All tools in one place</h3>

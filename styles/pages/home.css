@@ -43,6 +43,10 @@
   background-color: var(--main-hover-color);
 }
 
+.home-page-container {
+  margin-top: 10rem;
+}
+
 .heading {
   text-align: center;
   margin-bottom: 2rem;

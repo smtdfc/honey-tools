@@ -248,12 +248,7 @@ a.link {
 }
 
 .container {
-  /* width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px; */
   box-sizing: border-box;
-  margin-top: 6rem;
 }
 
 .card {
