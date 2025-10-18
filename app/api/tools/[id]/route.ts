@@ -1,11 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ToolService } from "@/services/tool";
 
-interface Params {
-  params: { id: string };
-}
-
-export async function GET(req: Request, { params }: Params) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
 
   try {
