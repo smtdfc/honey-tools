@@ -12,7 +12,8 @@ datasource db {
 model tools {
   id          String  @id  @db.VarChar(36)
   name        String  @db.Text
-  description String  @db.Text
+  shortDescription String  @db.Text @map("short_description")
+  description String @db.Text
   group        String  @db.Text
   author      Int
   iconType   String? @db.Text @map("icon_type")

@@ -330,3 +330,69 @@ a.link {
 .btn-icon:hover {
   background-color: var(--main-hover-color);
 }
+
+.btn {
+  margin: 5px;
+  background-color: var(--main-color);
+  color: var(--main-bg);
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 20px;
+  transition: transform 0.5s ease;
+}
+
+.btn:hover {
+  transform: scale(0.92);
+}
+
+.btn-group {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.btn-group .btn-left {
+  margin-left: auto;
+}
+
+.form-label {
+  margin: 1rem;
+}
+
+.sub-text {
+  font-size: 14px;
+  color: gray;
+}
+
+.skeleton {
+  background-color: #c9c9c9;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150px;
+  }
+  100% {
+    left: 100%;
+  }
+}

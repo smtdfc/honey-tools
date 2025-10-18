@@ -3,9 +3,8 @@ import RootLayoutClient from "@/components/RootLayoutClient";
 import Container from "@/components/Container";
 import AppContainer from "@/components/AppContainer";
 import prisma from "@/lib/prisma";
-
-import "./globals.css";
 import { Tool } from "@/entities/tool";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Honey tools",
@@ -13,7 +12,17 @@ export const metadata: Metadata = {
 };
 
 async function getGlobalTools(): Promise<Tool[]> {
-  const tools = await prisma.tools.findMany();
+  const tools = await prisma.tools.findMany({
+    select: {
+      id: true,
+      name: true,
+      icon: true,
+      iconType: true,
+      group: true,
+      shortDescription: true,
+      description: false,
+    },
+  });
   return tools;
 }
 

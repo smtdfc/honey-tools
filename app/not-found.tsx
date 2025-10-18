@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import "@/styles/not-found.css"; // import CSS
+import "@/styles/not-found.css";
 
 export default function NotFound() {
   return (

@@ -11,3 +11,73 @@
   align-items: center;
   column-gap: 20px;
 }
+
+.tool-layout-body {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.tool-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tool-box:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+.tool-box .title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-box .box {
+  color: #374151;
+  line-height: 1.65;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.tool-box .divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, #d1d5db, transparent);
+}
+
+.tool-error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin: 0.75rem 0;
+  font-weight: 500;
+}
+
+body.dark .tool-box {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+body.dark .tool-box .title {
+  color: #f3f4f6;
+}
+
+body.dark .tool-box .box {
+  color: #d1d5db;
+}
+body.dark .tool-box .divider {
+  background: linear-gradient(to right, #4b5563, transparent);
+}

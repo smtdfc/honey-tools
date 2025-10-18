@@ -25,7 +25,7 @@ function MenuIcon({ items }: MenuIconProps) {
             icon={t.icon ?? "apps"}
             onClick={() => router.push(`/tools/${t.id}`)}
           >
-            <span>{t.description}</span>
+            <span>{t.shortDescription}</span>
           </Card>
         );
       })}
