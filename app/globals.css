@@ -383,6 +383,19 @@ a.link {
   animation: shimmer 1.2s infinite;
 }
 
+body.dark .skeleton {
+  background-color: #333;
+}
+
+body.dark .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+}
+
 @keyframes shimmer {
   0% {
     left: -150px;
@@ -390,4 +403,39 @@ a.link {
   100% {
     left: 100%;
   }
+}
+
+.form-math-group {
+  margin-top: 0.5rem;
+}
+
+.form-math-group .latex {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.form-math-group label {
+  font-size: 14px;
+}
+
+.form-group {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+}
+
+.form-group input {
+  background-color: white;
+  padding: 0.8rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.form-group input:focus {
+  outline-color: black;
 }

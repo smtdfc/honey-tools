@@ -1,20 +1,18 @@
 "use client";
-import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import "katex/dist/katex.min.css";
+import Input from "@/components/Input";
 import MathDisplay from "@/components/MathDisplay";
 import MathInput from "@/components/MathInput";
-
-const MathKeyboard = dynamic(() => import("@/components/MathKeyboard"), {
-  ssr: false,
-});
 
 export default function Page() {
   const [expr, setExpr] = useState("");
   const [result, setResult] = useState("");
   const [errorMsg, setErrMsg] = useState("");
+  const [variable, setVariable] = useState("x");
+  const [level, setLevel] = useState(1);
 
-  const simplify = async () => {
+  const diff = async () => {
     if (expr.length == 0) {
       setErrMsg("Please type expression ");
       return;
@@ -29,19 +27,18 @@ export default function Page() {
       const body = await res.json();
       setResult(body.data.output ?? "Invalid expression");
     } catch (err) {
-      setErrMsg("Error simplifying expression");
+      setErrMsg("Error");
       console.error(err);
     }
   };
 
   return (
     <div className="tool-box">
-      <h1 className="title">Expression Simplifier</h1>
+      <h1 className="title">Derivative</h1>
       <p className="box">
-        This tool helps you <b>simplify mathematical expressions</b> instantly —
-        whether they involve algebraic terms, trigonometric identities, or
-        radicals. It’s powered by a symbolic math engine that understands LaTeX
-        syntax and converts it into clean, minimal form.
+        A powerful tool for computing derivatives, helping you quickly find the
+        derivative of any mathematical expression. Supports multivariable
+        functions, trigonometric, logarithmic, and exponential forms.
       </p>
 
       <hr className="divider" />
@@ -50,9 +47,23 @@ export default function Page() {
 
       <MathInput label="Expression:" onChange={setExpr} />
 
+      <Input
+        type="text"
+        value={variable}
+        label="Variable:"
+        onChange={(v) => setVariable(v)}
+      />
+
+      <Input
+        type="text"
+        value={level.toString()}
+        label="Level:"
+        onChange={(v) => setLevel(parseInt(v))}
+      />
+
       <div className="btn-group mt-4">
-        <button className="btn btn-left" onClick={simplify}>
-          Simplify
+        <button className="btn btn-left" onClick={diff}>
+          Derivative
         </button>
       </div>
 

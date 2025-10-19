@@ -39,7 +39,7 @@ export default function MathKeyboard({
           {value}
         </MathField>
       </div>
-      <p className="text-gray-500 text-sm mt-2">Latex: {value}</p>
+      <p className="latex">Latex: {value}</p>
     </>
   );
 }

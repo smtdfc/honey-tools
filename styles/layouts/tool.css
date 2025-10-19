@@ -73,6 +73,7 @@ body.dark .tool-box .title {
 body.dark .tool-box .box {
   color: #d1d5db;
 }
+
 body.dark .tool-box .divider {
   background: linear-gradient(to right, #4b5563, transparent);
 }
