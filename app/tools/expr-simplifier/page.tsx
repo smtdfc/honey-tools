@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { BlockMath } from "react-katex";
-import "@/styles/pages/tools/expr-simplifier.css";
+import "katex/dist/katex.min.css";
 
 const MathKeyboard = dynamic(() => import("@/components/MathKeyboard"), {
   ssr: false,
@@ -14,15 +14,19 @@ export default function Page() {
   const [errorMsg, setErrMsg] = useState("");
 
   const simplify = async () => {
+    if (expr.length == 0) {
+      setErrMsg("Please type expression ");
+      return;
+    }
     setErrMsg("");
     try {
       const res = await fetch(
         `${
           process.env.NEXT_PUBLIC_MATH_SERVER
-        }/tools/simplify-expr?expr=${encodeURIComponent(expr)}`
+        }/api/v1/simplify?expr=${encodeURIComponent(expr)}`
       );
-      const data = await res.json();
-      setResult(data.result ?? "Invalid expression");
+      const body = await res.json();
+      setResult(body.data.output ?? "Invalid expression");
     } catch (err) {
       setErrMsg("Error simplifying expression");
       console.error(err);
@@ -53,13 +57,13 @@ export default function Page() {
       </div>
 
       <label className="block font-semibold mt-6">Result:</label>
-      <p className="mt-2">
+      <div className="mt-2">
         {result ? (
           <BlockMath math={result} />
         ) : (
           <i className="sub-text">Please enter expression to simplify</i>
         )}
-      </p>
+      </div>
     </div>
   );
 }

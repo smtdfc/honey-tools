@@ -28,7 +28,14 @@ export default function MathKeyboard({
   return (
     <>
       <div style={{ margin: "0.5rem" }}>
-        <MathField ref={mathfieldRef} style={{ width: "100%" }}>
+        <MathField
+          options={{
+            keypressSound: null,
+            plonkSound: null,
+          }}
+          ref={mathfieldRef}
+          style={{ width: "100%" }}
+        >
           {value}
         </MathField>
       </div>

@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ToolService } from "@/services/tool";
 
-interface Params {
-  params: Promise<{ id: string }>;
-}
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.searchParams.get("id");
 
-export async function GET(req: NextRequest, { params }: Params) {
-  const { id } = await params;
+  if (!id) {
+    return NextResponse.json(
+      { error: "Missing id parameter" },
+      { status: 400 }
+    );
+  }
 
   try {
     const tool = await ToolService.getToolById(id);

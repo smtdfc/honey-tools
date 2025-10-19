@@ -32,7 +32,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const tools = await getGlobalTools();
-  console.log(tools);
   return (
     <html lang="en">
       <head>
