@@ -38,17 +38,7 @@ export default function Page() {
   };
 
   return (
-    <div className="tool-box">
-      <h1 className="title">Expression Simplifier</h1>
-      <p className="box">
-        This tool helps you <b>simplify mathematical expressions</b> instantly —
-        whether they involve algebraic terms, trigonometric identities, or
-        radicals. It’s powered by a symbolic math engine that understands LaTeX
-        syntax and converts it into clean, minimal form.
-      </p>
-
-      <hr className="divider" />
-
+    <>
       {errorMsg ? <div className="tool-error">{errorMsg}</div> : ""}
 
       <MathInput label="Expression:" onChange={setExpr} />
@@ -60,6 +50,6 @@ export default function Page() {
       </div>
 
       <MathDisplay label="Result: " expr={result} />
-    </div>
+    </>
   );
 }

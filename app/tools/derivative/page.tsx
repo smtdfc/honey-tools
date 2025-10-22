@@ -47,16 +47,7 @@ export default function Page() {
   };
 
   return (
-    <div className="tool-box">
-      <h1 className="title">Derivative</h1>
-      <p className="box">
-        A powerful tool for computing derivatives, helping you quickly find the
-        derivative of any mathematical expression. Supports multivariable
-        functions, trigonometric, logarithmic, and exponential forms.
-      </p>
-
-      <hr className="divider" />
-
+    <>
       {errorMsg ? <div className="tool-error">{errorMsg}</div> : ""}
 
       <MathInput label="Expression:" onChange={setExpr} />
@@ -82,6 +73,6 @@ export default function Page() {
       </div>
 
       <MathDisplay label="Result: " expr={result} />
-    </div>
+    </>
   );
 }

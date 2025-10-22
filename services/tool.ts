@@ -10,6 +10,7 @@ export const ToolService = {
         icon: true,
         iconType: true,
         group: true,
+        description: true,
         shortDescription: true,
       },
     });

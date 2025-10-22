@@ -50,24 +50,8 @@ export default function Page() {
   };
 
   return (
-    <div className="tool-box">
-      <h1 className="title">Integrate</h1>
-      <p className="box">
-        This powerful integration tool allows you to enter any mathematical
-        expression and compute its indefinite or definite integral efficiently.
-        It supports a wide range of functions including polynomials,
-        trigonometric functions, logarithmic functions, exponential functions,
-        and combinations thereof. Simply specify the variable of integration
-        and, if needed, the lower and upper limits to obtain precise results
-        instantly. Whether you are a student, educator, or professional, this
-        tool simplifies the process of solving integrals, providing clear and
-        accurate outputs formatted for easy reading.
-      </p>
-
-      <hr className="divider" />
-
+    <>
       {errorMsg ? <div className="tool-error">{errorMsg}</div> : ""}
-
       <MathInput label="Expression:" onChange={setExpr} />
 
       <Input
@@ -87,6 +71,8 @@ export default function Page() {
       </div>
 
       <MathDisplay label="Result: " expr={result} />
-    </div>
+
+      <hr className="divider" />
+    </>
   );
 }

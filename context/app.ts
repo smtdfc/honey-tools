@@ -4,6 +4,7 @@ import { Tool } from "@/entities/tool";
 
 interface IAppContext {
   tools: Tool[];
+  currentTool?: string;
   themeMode: string;
   setThemeMode: (mode: string) => void;
 }
