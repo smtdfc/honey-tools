@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { MathJSON } from "@/types/math/mathjson";
 
 const MathKeyboard = dynamic(() => import("@/components/MathKeyboard"), {
   ssr: false,
@@ -7,11 +8,11 @@ const MathKeyboard = dynamic(() => import("@/components/MathKeyboard"), {
 
 type MathInputProps = {
   label: string;
-  value?: string;
-  onChange?: (value: any) => void;
+  value?: MathJSON;
+  onChange?: (value: MathJSON) => void;
 };
 
-export default function MathInput({ onChange, label, value }: MathInputProps) {
+export default function MathInput({ onChange, label }: MathInputProps) {
   return (
     <div className="form-math-group">
       <label className="block font-semibold mb-2">{label}</label>

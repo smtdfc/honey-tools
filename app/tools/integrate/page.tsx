@@ -7,17 +7,19 @@ import { MathJSON } from "@/types/math/mathjson";
 import axios from "axios";
 import "katex/dist/katex.min.css";
 
-async function diff(
+async function integrate(
   expr: MathJSON,
   variable: string = "x",
-  order: number = 1
+  a: MathJSON = [0],
+  b: MathJSON = [0]
 ): Promise<string> {
   const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_MATH_SERVER}/api/v1/diff`,
+    `${process.env.NEXT_PUBLIC_MATH_SERVER}/api/v1/integrate`,
     {
       expr,
       var: variable,
-      order,
+      a,
+      b,
     }
   );
   const body = res.data;
@@ -30,7 +32,8 @@ export default function Page() {
   const [result, setResult] = useState("");
   const [errorMsg, setErrMsg] = useState("");
   const [variable, setVariable] = useState("x");
-  const [order, setOrder] = useState(1);
+  const [a, setA] = useState<MathJSON>([]);
+  const [b, setB] = useState<MathJSON>([]);
 
   const submit = async () => {
     if (expr.length == 0) {
@@ -40,7 +43,7 @@ export default function Page() {
 
     setErrMsg("");
     try {
-      setResult(await diff(expr, variable, order));
+      setResult(await integrate(expr, variable, a, b));
     } catch {
       setErrMsg("Error");
     }
@@ -48,11 +51,17 @@ export default function Page() {
 
   return (
     <div className="tool-box">
-      <h1 className="title">Derivative</h1>
+      <h1 className="title">Integrate</h1>
       <p className="box">
-        A powerful tool for computing derivatives, helping you quickly find the
-        derivative of any mathematical expression. Supports multivariable
-        functions, trigonometric, logarithmic, and exponential forms.
+        This powerful integration tool allows you to enter any mathematical
+        expression and compute its indefinite or definite integral efficiently.
+        It supports a wide range of functions including polynomials,
+        trigonometric functions, logarithmic functions, exponential functions,
+        and combinations thereof. Simply specify the variable of integration
+        and, if needed, the lower and upper limits to obtain precise results
+        instantly. Whether you are a student, educator, or professional, this
+        tool simplifies the process of solving integrals, providing clear and
+        accurate outputs formatted for easy reading.
       </p>
 
       <hr className="divider" />
@@ -68,16 +77,12 @@ export default function Page() {
         onChange={(v) => setVariable(v)}
       />
 
-      <Input
-        type="text"
-        value={order.toString()}
-        label="Order:"
-        onChange={(v) => setOrder(parseInt(v))}
-      />
+      <MathInput label="A:" onChange={setA} />
+      <MathInput label="B:" onChange={setB} />
 
       <div className="btn-group mt-4">
         <button className="btn btn-left" onClick={submit}>
-          Derivative
+          Integrate
         </button>
       </div>
 

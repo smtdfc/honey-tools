@@ -1,36 +1,39 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import "katex/dist/katex.min.css";
 import MathDisplay from "@/components/MathDisplay";
 import MathInput from "@/components/MathInput";
+import { MathJSON } from "@/types/math/mathjson";
+import axios from "axios";
+import "katex/dist/katex.min.css";
 
-const MathKeyboard = dynamic(() => import("@/components/MathKeyboard"), {
-  ssr: false,
-});
+async function simplify(expr: MathJSON): Promise<string> {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_MATH_SERVER}/api/v1/simplify`,
+    {
+      expr,
+    }
+  );
+  const body = res.data;
+  const output = body.data.output;
+  return output;
+}
 
 export default function Page() {
-  const [expr, setExpr] = useState("");
+  const [expr, setExpr] = useState<MathJSON>([]);
   const [result, setResult] = useState("");
   const [errorMsg, setErrMsg] = useState("");
 
-  const simplify = async () => {
+  const submit = async () => {
     if (expr.length == 0) {
       setErrMsg("Please type expression ");
       return;
     }
     setErrMsg("");
     try {
-      const res = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_MATH_SERVER
-        }/api/v1/simplify?expr=${encodeURIComponent(expr)}`
-      );
-      const body = await res.json();
-      setResult(body.data.output ?? "Invalid expression");
-    } catch (err) {
-      setErrMsg("Error simplifying expression");
-      console.error(err);
+      setResult(await simplify(expr));
+    } catch {
+      setErrMsg("Error");
     }
   };
 
@@ -51,7 +54,7 @@ export default function Page() {
       <MathInput label="Expression:" onChange={setExpr} />
 
       <div className="btn-group mt-4">
-        <button className="btn btn-left" onClick={simplify}>
+        <button className="btn btn-left" onClick={submit}>
           Simplify
         </button>
       </div>
