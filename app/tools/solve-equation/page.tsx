@@ -7,19 +7,17 @@ import { MathJSON } from "@/types/math/mathjson";
 import axios from "axios";
 import "katex/dist/katex.min.css";
 
-async function integrate(
+async function solveEq(
   expr: MathJSON,
   variable: string = "x",
   a: MathJSON = [0],
   b: MathJSON = [0]
 ): Promise<string> {
   const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_MATH_SERVER}/api/v1/integrate`,
+    `${process.env.NEXT_PUBLIC_MATH_SERVER}/api/v1/solve-equation`,
     {
       expr,
       var: variable,
-      a,
-      b,
     }
   );
   const body = res.data;
@@ -32,8 +30,6 @@ export default function Page() {
   const [result, setResult] = useState("");
   const [errorMsg, setErrMsg] = useState("");
   const [variable, setVariable] = useState("x");
-  const [a, setA] = useState<MathJSON>([]);
-  const [b, setB] = useState<MathJSON>([]);
 
   const submit = async () => {
     if (expr.length == 0) {
@@ -43,7 +39,7 @@ export default function Page() {
 
     setErrMsg("");
     try {
-      setResult(await integrate(expr, variable, a, b));
+      setResult(await solveEq(expr, variable));
     } catch {
       setErrMsg("Error");
     }
@@ -61,12 +57,9 @@ export default function Page() {
         onChange={(v) => setVariable(v)}
       />
 
-      <MathInput label="A:" onChange={setA} />
-      <MathInput label="B:" onChange={setB} />
-
       <div className="btn-group mt-4">
         <button className="btn btn-left" onClick={submit}>
-          Integrate
+          Solve
         </button>
       </div>
 

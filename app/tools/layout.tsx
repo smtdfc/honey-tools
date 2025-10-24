@@ -5,7 +5,6 @@ import { useAppData } from "@/hooks/useAppData";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
-import { ToolService } from "@/services/tool";
 import { Tool } from "@/entities/tool";
 
 export default function ToolLayout({

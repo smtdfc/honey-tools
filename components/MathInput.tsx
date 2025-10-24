@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import dynamic from "next/dynamic";
 import { MathJSON } from "@/types/math/mathjson";
 
@@ -10,11 +10,12 @@ type MathInputProps = {
   label: string;
   value?: MathJSON;
   onChange?: (value: MathJSON) => void;
+  styles?: CSSProperties;
 };
 
-export default function MathInput({ onChange, label }: MathInputProps) {
+export default function MathInput({ styles, onChange, label }: MathInputProps) {
   return (
-    <div className="form-math-group">
+    <div className="form-math-group" style={styles}>
       <label className="block font-semibold mb-2">{label}</label>
       <MathKeyboard onChange={onChange} />
     </div>
